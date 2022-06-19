@@ -37,6 +37,7 @@ public class ProductRepositoryTest {
 
     @Test
     public void muTest1() {
+
         ProductRepository repo = new ProductRepository();
         repo.save(first);
         repo.save(second);

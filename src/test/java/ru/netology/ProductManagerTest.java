@@ -6,6 +6,7 @@ import ru.netology.manager.Book;
 import ru.netology.manager.Product;
 import ru.netology.manager.ProductManager;
 import ru.netology.manager.Smartphone;
+import ru.netology.repository.ProductRepository;
 
 public class ProductManagerTest {
     Book first = new Book(38, "Вечер", 24, "Петров");
@@ -18,7 +19,10 @@ public class ProductManagerTest {
     @Test
 
     public void searchByProd() {
-        ProductManager manager = new ProductManager();
+        ProductRepository repo = new ProductRepository();
+
+        ProductManager manager = new ProductManager(repo);
+
         manager.add(first);
         manager.add(second);
         manager.add(third);
@@ -28,6 +32,25 @@ public class ProductManagerTest {
 
         Product[] actual = manager.searchBy("PPC51");
         Product[] expected = {second1};
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+
+    public void searchByProd1() {
+        ProductRepository repo = new ProductRepository();
+
+        ProductManager manager = new ProductManager(repo);
+
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(first1);
+        manager.add(second1);
+        manager.add(third1);
+
+        Product[] actual = manager.searchBy("Вечер");
+        Product[] expected = {first, third};
         Assertions.assertArrayEquals(expected, actual);
     }
 }
