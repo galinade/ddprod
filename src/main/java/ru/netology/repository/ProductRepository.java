@@ -25,20 +25,32 @@ public class ProductRepository {
         return prod;
     }
 
-    public void removeById(int id) {
+    public Product[] removeById(int id) {
+        //if (findById() == null) {
+            throw new NotFoundException("Element with id: " + id + " not found");
+        }
         int length = prod.length - 1;
         Product[] tmp = new Product[length];
         int index = 0;
-        for (Product product : prod) {
-            if (product.getId() != id) {
-                tmp[index] = product;
-                index++;
+        //for (Product product : prod) {
+         //   if (product.getId() != id) {
+         //       tmp[index] = product;
+          //      index++;
+         //   }
+      //  }
+     //   prod = tmp;
+
+        public Product[] findById(int id){
+            for (Product product : prod) {
+                if (product.getId() != id) {
+                    return prod;
+                }
             }
+            return null;
         }
-        prod = tmp;
 
 
     }
-}
+
 
 

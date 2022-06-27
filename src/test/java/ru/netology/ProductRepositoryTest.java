@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import ru.netology.manager.Book;
 import ru.netology.manager.Product;
 import ru.netology.manager.Smartphone;
+import ru.netology.repository.NotFoundException;
 import ru.netology.repository.ProductRepository;
 
 public class ProductRepositoryTest {
@@ -25,35 +26,45 @@ public class ProductRepositoryTest {
         repo.save(first1);
         repo.save(second1);
         repo.save(third1);
+        Assertions.assertThrows(NotFoundException.class, () -> {
+            repo.removeById(-143);
+        });
+ //  @Test
+       // public void muTest2() {
+        //    ProductRepository repo = new ProductRepository();
+            repo.save(first);
+            repo.save(second);
+            repo.save(third);
+            repo.save(first1);
+            repo.save(second1);
+            repo.save(third1);
+            Assertions.assertThrows(NotFoundException.class, () -> {
+                repo.removeById(143);
+            });
 
-        repo.removeById(143);
 
-        Product[] actual = repo.findAll();
-        Product[] expected = {first, second, third, second1, third1};
-        Assertions.assertArrayEquals(expected, actual);
+        }
+
+        @Test
+        public void muTest1() {
+
+            ProductRepository repo = new ProductRepository();
+            repo.save(first);
+            repo.save(second);
+            repo.save(third);
+            repo.save(first1);
+            repo.save(second1);
+            repo.save(third1);
+
+            repo.removeById(38);
+
+            Product[] actual = repo.findAll();
+            Product[] expected = {second, third, first1, second1, third1};
+            Assertions.assertArrayEquals(expected, actual);
+
+
+        }
 
 
     }
 
-    @Test
-    public void muTest1() {
-
-        ProductRepository repo = new ProductRepository();
-        repo.save(first);
-        repo.save(second);
-        repo.save(third);
-        repo.save(first1);
-        repo.save(second1);
-        repo.save(third1);
-
-        repo.removeById(38);
-
-        Product[] actual = repo.findAll();
-        Product[] expected = {second, third, first1, second1, third1};
-        Assertions.assertArrayEquals(expected, actual);
-
-
-    }
-
-
-}
